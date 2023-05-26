@@ -14,13 +14,14 @@
 
   <body>
     <div id="container">
-      <div class="score">SCORE:</div>
+      <div class="score">SCORE: 0</div>
       <div class="buttons">
-        <button>
-          <i class="fa-play"></i>
+        <button onclick="togglePause()">
+          <i class="fas fa-play"></i>
         </button>
       </div>
-      <div id="game-window"></div>
+      <div id="game-window">
+      </div>
       <div id="inputBox">
         <input type="number" autocomplete="off" id="textbox" />
       </div>

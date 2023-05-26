@@ -1,14 +1,31 @@
 function generateQuestion() {
-  const num1 = Math.floor(Math.random() * 10) + 1;
-  const num2 = Math.floor(Math.random() * 10) + 1;
-  const operator = Math.random() < 0.5 ? "+" : "-";
-  const question = `${num1} ${operator} ${num2}`;
-  const answer = operator === "+" ? num1 + num2 : num1 - num2;
-  return { question, answer, num1, num2, operator };
-}
+  var operators = ['+', '-', '*', '/'];
+  var operator = operators[Math.floor(Math.random() * operators.length)];
+  var num1 = Math.floor(Math.random() * 10) + 1;
+  var num2 = Math.floor(Math.random() * 10) + 1;
+  if (operator === '/') {
+    // Ensure the division question has a whole number answer
+    while (num1 % num2 !== 0) {
+      num1 = Math.floor(Math.random() * 10) + 1;
+      num2 = Math.floor(Math.random() * 10) + 1;
+    }
+  }
 
+  return { answer: eval(num1 + operator + num2), num1, num2, operator };
+
+}
 let pause = false;
 let health = 3;
+let score = 0;
+let highScore;
+// let waveHeight = 100;
+
+highScore = localStorage.getItem("high-score");
+
+if (!highScore) {
+  localStorage.setItem("high-score", 0);
+  highScore = 0;
+}
 
 // Create and animate a bubble
 window.addEventListener("blur", function () {
@@ -19,10 +36,12 @@ window.addEventListener("focus", function () {
   pause = false;
 });
 
+let scoreBox = document.querySelector(".score");
+
 function createBubble() {
   if (pause) return;
   const bubble = document.createElement("div");
-  const { question, answer, num1, num2, operator } = generateQuestion();
+  const { answer, num1, num2, operator } = generateQuestion();
   // bubble.textContent = question;
   bubble.classList.add("bubble");
   bubble.dataset.answer = answer;
@@ -38,26 +57,6 @@ function createBubble() {
   animateBubble(bubble);
 }
 
-// Animate the bubble's movement
-// function animateBubble(bubble) {
-//   const gameContainer = document.querySelector("#game-window")
-//   const left = Math.random() * (gameContainer.offsetWidth - bubble.offsetWidth);
-
-//   let top = -50;
-//   const animationInterval = setInterval(() => {
-//     top += 5;
-//     bubble.style.left = left * 0.9 + 'px';
-//     bubble.style.top = top + 'px';
-//     if (top >= gameContainer.offsetHeight - bubble.offsetHeight) {
-//       clearInterval(animationInterval);
-//       bubble.remove();
-//       health--;
-//       if (health === 0) {
-//         gameOver();
-//       }
-//     }
-//   }, 50);
-// }
 
 function animateBubble(bubble) {
   const gameContainer = document.querySelector("#game-window");
@@ -65,6 +64,11 @@ function animateBubble(bubble) {
 
   let top = -50;
   const animationInterval = setInterval(() => {
+    // Pause animation
+    if (pause) {
+      return;
+    }
+
     if (bubble.parentNode == null) {
       clearInterval(animationInterval);
       return;
@@ -72,28 +76,33 @@ function animateBubble(bubble) {
     top += 5;
     bubble.style.left = left * 0.9 + "px";
     bubble.style.top = top + "px";
+    // if (top >= gameContainer.offsetHeight - bubble.offsetHeight - waveHeight) {
     if (top >= gameContainer.offsetHeight - bubble.offsetHeight) {
       clearInterval(animationInterval);
       bubble.remove();
       health--;
       if (health === 0) {
-        // gameOver();
+        gameOver();
       }
     }
   }, 50);
 }
 
+
 let intervalId = null;
 
 // Game over event
 function gameOver() {
-  debugger;
+  // debugger;
   pause = true;
   const bubbles = Array.from(document.getElementsByClassName("bubble"));
   clearInterval(intervalId);
   for (let i = 0; i < bubbles.length; i++) {
     const bubble = bubbles[i];
     bubble.remove();
+  }
+  if (score > highScore) {
+    localStorage.setItem("high-score", score);
   }
 }
 
@@ -116,10 +125,18 @@ document
           const answer = parseInt(bubble.dataset.answer);
           if (userAnswer === answer) {
             bubble.remove();
+            score += 50;
+            scoreBox.textContent = `SCORE: ${score}`;
+            // waveHeight += 5;
           }
         }
         document.getElementById("textbox").value = "";
       }
     }
   });
+
+function togglePause() {
+  console.log(pause);
+  pause = !pause;
+}
 startGame();
