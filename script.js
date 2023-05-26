@@ -1,10 +1,9 @@
 function generateQuestion() {
-  var operators = ['+', '-', '*', '/'];
+  var operators = ["+", "-", "*", "/"];
   var operator = operators[Math.floor(Math.random() * operators.length)];
   var num1 = Math.floor(Math.random() * 10) + 1;
   var num2 = Math.floor(Math.random() * 10) + 1;
-  if (operator === '/') {
-    // Ensure the division question has a whole number answer
+  if (operator === "/") {
     while (num1 % num2 !== 0) {
       num1 = Math.floor(Math.random() * 10) + 1;
       num2 = Math.floor(Math.random() * 10) + 1;
@@ -12,7 +11,6 @@ function generateQuestion() {
   }
 
   return { answer: eval(num1 + operator + num2), num1, num2, operator };
-
 }
 let pause = false;
 let health = 3;
@@ -27,13 +25,8 @@ if (!highScore) {
   highScore = 0;
 }
 
-// Create and animate a bubble
 window.addEventListener("blur", function () {
-  pause = true;
-});
-
-window.addEventListener("focus", function () {
-  pause = false;
+  if (health) pauseGame();
 });
 
 let scoreBox = document.querySelector(".score");
@@ -42,7 +35,6 @@ function createBubble() {
   if (pause) return;
   const bubble = document.createElement("div");
   const { answer, num1, num2, operator } = generateQuestion();
-  // bubble.textContent = question;
   bubble.classList.add("bubble");
   bubble.dataset.answer = answer;
   bubble.style.top = "-100px";
@@ -57,14 +49,12 @@ function createBubble() {
   animateBubble(bubble);
 }
 
-
 function animateBubble(bubble) {
   const gameContainer = document.querySelector("#game-window");
   const left = Math.random() * (gameContainer.offsetWidth - bubble.offsetWidth);
 
   let top = -50;
   const animationInterval = setInterval(() => {
-    // Pause animation
     if (pause) {
       return;
     }
@@ -88,12 +78,11 @@ function animateBubble(bubble) {
   }, 50);
 }
 
-
 let intervalId = null;
 
 // Game over event
 function gameOver() {
-  // debugger;
+  document.querySelector(".gameOverScreen").classList.remove("goToTop");
   pause = true;
   const bubbles = Array.from(document.getElementsByClassName("bubble"));
   clearInterval(intervalId);
@@ -106,17 +95,17 @@ function gameOver() {
   }
 }
 
-// Start the game
 function startGame() {
+  health = 3;
+  document.querySelector(".playScreen").classList.add("goToTop");
+  document.querySelector(".gameOverScreen").classList.add("goToTop");
   intervalId = setInterval(createBubble, 1500);
 }
 
-// Attach event listener for Enter key press
 document
   .getElementById("textbox")
   .addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
-      // debugger;
       const userAnswer = parseInt(document.getElementById("textbox").value);
       if (!isNaN(userAnswer)) {
         const bubbles = document.getElementsByClassName("bubble");
@@ -135,8 +124,12 @@ document
     }
   });
 
-function togglePause() {
-  console.log(pause);
-  pause = !pause;
+function pauseGame() {
+  document.querySelector(".pauseScreen").classList.remove("goToTop");
+  pause = true;
 }
-startGame();
+
+function resumeGame() {
+  document.querySelector(".pauseScreen").classList.add("goToTop");
+  pause = false;
+}

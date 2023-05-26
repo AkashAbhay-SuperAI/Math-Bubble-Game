@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Pangolin&display=swap");
 html,
 body {
   height: 100%;
@@ -10,7 +11,7 @@ body {
 }
 
 * {
-  font-family: sans-serif;
+  font-family: "pangolin";
 }
 
 input::-webkit-outer-spin-button,
@@ -29,6 +30,7 @@ input[type="number"] {
   border: 3rem solid #efefef;
   background-color: white;
   position: relative;
+  overflow: hidden;
 }
 
 .score {
@@ -80,6 +82,56 @@ input[type="number"] {
   background-color: lightskyblue;
 }
 
+.playScreen,
+.pauseScreen,
+.gameOverScreen {
+  position: absolute;
+  top: 0;
+  z-index: 100000;
+  background-color: cadetblue;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: all 200ms ease-out;
+  font-size: 5rem;
+}
+
+font {
+  filter: drop-shadow(0 0 0.35rem rgba(255, 255, 255, 0.5));
+  -webkit-text-fill-color: cadetblue; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
+  margin-bottom: 0.5rem;
+}
+
+.playScreen button,
+.pauseScreen button,
+.gameOverScreen button {
+  font-size: 2rem;
+  padding: 0.5rem 1.5rem;
+  border-radius: 1rem;
+  font-weight: 600;
+  color: white;
+  outline: none;
+  border: none;
+  background-color: teal;
+  filter: drop-shadow(0 0 0.85rem teal);
+  transition: all 200ms ease-out;
+  letter-spacing: 0.25rem;
+  cursor: pointer;
+}
+
+.goToTop {
+  top: -100%;
+}
+
+.playScreen button:hover {
+  scale: 1.05;
+}
+
 #inputBox {
   background-color: teal;
   display: flex;
@@ -92,7 +144,6 @@ input[type="number"] {
   transform: rotate(45deg);
   font-size: 1.35rem;
   font-weight: 600;
-  font-family: sans-serif;
   display: flex;
   flex-direction: column;
   align-items: end;

@@ -14,14 +14,34 @@
 
   <body>
     <div id="container">
-      <div class="score">SCORE: 0</div>
-      <div class="buttons">
-        <button onclick="togglePause()">
+      <div class="playScreen">
+        <font> Raindrops </font>
+        <button onclick="startGame()">
+          Start
           <i class="fas fa-play"></i>
         </button>
       </div>
-      <div id="game-window">
+      <div class="pauseScreen goToTop">
+        <font> Resume the game </font>
+        <button onclick="resumeGame()">
+          Resume
+          <i class="fas fa-play"></i>
+        </button>
       </div>
+      <div class="gameOverScreen goToTop">
+        <font> Game Over :( </font>
+        <button onclick="startGame()">
+          Restart
+          <i class="fas fa-refresh"></i>
+        </button>
+      </div>
+      <div class="score">SCORE: 0</div>
+      <div class="buttons">
+        <button onclick="pauseGame()">
+          <i class="fas fa-pause"></i>
+        </button>
+      </div>
+      <div id="game-window"></div>
       <div id="inputBox">
         <input type="number" autocomplete="off" id="textbox" />
       </div>
