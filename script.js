@@ -16,7 +16,6 @@ let pause = false;
 let health = 3;
 let score = 0;
 let highScore;
-// let waveHeight = 100;
 
 let init = false;
 
@@ -68,9 +67,10 @@ function animateBubble(bubble) {
     top += 5;
     bubble.style.left = left * 0.9 + "px";
     bubble.style.top = top + "px";
-    // if (top >= gameContainer.offsetHeight - bubble.offsetHeight - waveHeight) {
     if (top >= gameContainer.offsetHeight - bubble.offsetHeight) {
       clearInterval(animationInterval);
+      const el = document.querySelector("#inputBox");
+      el.style.height = el.offsetHeight + 16 + "px";
       bubble.remove();
       health--;
       if (health === 0) {
@@ -104,6 +104,8 @@ function startGame() {
   init = true;
   health = 3;
   score = 0;
+  const el = document.querySelector("#inputBox");
+  el.style.height = "4rem";
   scoreBox.textContent = `SCORE: ${score}`;
   pause = false;
   document.querySelector(".playScreen").classList.add("goToTop");
@@ -125,7 +127,6 @@ document
             bubble.remove();
             score += 50;
             scoreBox.textContent = `SCORE: ${score}`;
-            // waveHeight += 5;
           }
         }
         document.getElementById("textbox").value = "";
