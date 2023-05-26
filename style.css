@@ -83,7 +83,7 @@ input[type="number"] {
   background-size: cover;
   position: relative;
   box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.25);
-  background-color: lightskyblue;
+  background-color: skyblue;
 }
 
 .playScreen,
@@ -100,6 +100,7 @@ input[type="number"] {
   justify-content: center;
   flex-direction: column;
   transition: all 200ms ease-out;
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.25);
   font-size: 5rem;
 }
 
@@ -155,6 +156,11 @@ font {
   padding: 0.5rem 0;
   height: 4rem;
   position: relative;
+  box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.25);
+}
+
+#inputBox input {
+  width: 10rem;
 }
 
 .bars {
