@@ -4,7 +4,7 @@ function generateQuestion() {
   const operator = Math.random() < 0.5 ? "+" : "-";
   const question = `${num1} ${operator} ${num2}`;
   const answer = operator === "+" ? num1 + num2 : num1 - num2;
-  return { question, answer };
+  return { question, answer, num1, num2, operator };
 }
 
 let pause = false;
@@ -22,12 +22,19 @@ window.addEventListener("focus", function () {
 function createBubble() {
   if (pause) return;
   const bubble = document.createElement("div");
-  const { question, answer } = generateQuestion();
-  bubble.textContent = question;
+  const { question, answer, num1, num2, operator } = generateQuestion();
+  // bubble.textContent = question;
   bubble.classList.add("bubble");
   bubble.dataset.answer = answer;
-  bubble.style.top = "-50px";
+  bubble.style.top = "-100px";
+
+  const text = document.createElement("p");
+  text.classList.add("text");
+  text.innerHTML = `<div>${num1}</div>${operator} ${num2}`;
+
+  bubble.appendChild(text);
   document.getElementById("game-window").appendChild(bubble);
+
   animateBubble(bubble);
 }
 
@@ -59,7 +66,6 @@ function animateBubble(bubble) {
   let top = -50;
   const animationInterval = setInterval(() => {
     if (bubble.parentNode == null) {
-      // bubble has been removed, so stop the interval
       clearInterval(animationInterval);
       return;
     }
@@ -71,7 +77,7 @@ function animateBubble(bubble) {
       bubble.remove();
       health--;
       if (health === 0) {
-        gameOver();
+        // gameOver();
       }
     }
   }, 50);
@@ -116,4 +122,4 @@ document
       }
     }
   });
-// startGame();
+startGame();
