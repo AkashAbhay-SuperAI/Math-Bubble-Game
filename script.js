@@ -105,6 +105,7 @@ function gameOver() {
 }
 
 function startGame() {
+  highScore = localStorage.getItem("high-score");
   init = true;
   health = 3;
   score = 0;
