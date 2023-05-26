@@ -49,6 +49,7 @@ function createBubble() {
 
   animateBubble(bubble);
 }
+const bars = document.querySelectorAll(".bar");
 
 function animateBubble(bubble) {
   const gameContainer = document.querySelector("#game-window");
@@ -71,6 +72,9 @@ function animateBubble(bubble) {
       clearInterval(animationInterval);
       const el = document.querySelector("#inputBox");
       el.style.height = el.offsetHeight + 16 + "px";
+
+      bars[health - 1].style.borderColor = "goldenrod";
+
       bubble.remove();
       health--;
       if (health === 0) {
@@ -106,6 +110,11 @@ function startGame() {
   score = 0;
   const el = document.querySelector("#inputBox");
   el.style.height = "4rem";
+
+  bars.forEach((bar) => {
+    bar.style.borderColor = "#eee";
+  });
+
   scoreBox.textContent = `SCORE: ${score}`;
   pause = false;
   document.querySelector(".playScreen").classList.add("goToTop");
