@@ -12,6 +12,7 @@ body {
 
 * {
   font-family: "pangolin";
+  user-select: none;
 }
 
 input::-webkit-outer-spin-button,
