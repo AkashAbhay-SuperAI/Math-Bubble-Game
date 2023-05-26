@@ -141,7 +141,9 @@ font {
   top: -100%;
 }
 
-.playScreen button:hover {
+.playScreen button:hover,
+.pauseScreen button:hover,
+.gameOverScreen button:hover {
   scale: 1.05;
 }
 
