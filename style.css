@@ -1,57 +1,78 @@
-    html,
-    body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      overflow: hiddden;
-      /* overflow: hidden; */
-    }
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hiddden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
 
-    #game-window {
-      width: 500px;
-      border: 1px solid red;
-      height: 500px;
-      background-image: url('game_background.jpg');
-      background-size: cover;
-      position: relative;
-    }
+#container {
+  filter: drop-shadow(0 0 0.75rem rgba(0, 0, 0, 0.25));
+  border: 3rem solid #efefef;
+  background-color: white;
+}
 
-    .bubble {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 50px;
-      height: 50px;
-      background-color: #00f;
-      position: absolute;
-      top: -20px;
-      color: white;
-      left: calc(50% - 10px);
-      border-radius: 80% 0 55% 50% / 55% 0 80% 50%;
-      pointer-events: none;
-      background-position: 50%;
-      transform: rotate(-45deg);
-      background-repeat: no-repeat;
-      background-size: 100% 200%;
-      animation: raindrop 1s infinite linear;
-    }
+#game-window {
+  width: 650px;
+  height: 500px;
+  background-image: url("game_background.jpg");
+  background-size: cover;
+  position: relative;
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.25);
+  background-color: lightskyblue;
+}
 
-    @keyframes raindrop {
-      0% {
-        background-position-y: 0%;
-      }
+#inputBox {
+  background-color: teal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0;
+}
 
-      100% {
-        background-position-y: 100%;
-      }
-    }
+.bubble {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background-color: #00f;
+  position: absolute;
+  top: -20px;
+  color: white;
+  left: calc(50% - 10px);
+  border-radius: 80% 0 55% 50% / 55% 0 80% 50%;
+  pointer-events: none;
+  background-position: 50%;
+  transform: rotate(-45deg);
+  background-repeat: no-repeat;
+  background-size: 100% 200%;
+  animation: raindrop 1s infinite linear;
+}
 
-    #textbox {
-      width: 200px;
-      margin: 10px auto;
-      text-align: center;
-      background-color: rgba(255, 255, 255, 0.8);
-      border: none;
-      padding: 5px;
-      font-size: 16px;
-    }
+@keyframes raindrop {
+  0% {
+    background-position-y: 0%;
+  }
+
+  100% {
+    background-position-y: 100%;
+  }
+}
+
+#textbox {
+  text-align: center;
+  outline: none;
+  border: none;
+  height: 3rem;
+  color: white;
+  font-weight: 600;
+  background-color: rgba(0, 0, 0, 0.25);
+  border: none;
+  padding: 5px;
+  font-size: 16px;
+}
