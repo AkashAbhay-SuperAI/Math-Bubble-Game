@@ -18,6 +18,8 @@ let score = 0;
 let highScore;
 // let waveHeight = 100;
 
+let init = false;
+
 highScore = localStorage.getItem("high-score");
 
 if (!highScore) {
@@ -26,7 +28,7 @@ if (!highScore) {
 }
 
 window.addEventListener("blur", function () {
-  if (health) pauseGame();
+  if (health && init) pauseGame();
 });
 
 let scoreBox = document.querySelector(".score");
@@ -99,6 +101,7 @@ function gameOver() {
 }
 
 function startGame() {
+  init = true;
   health = 3;
   score = 0;
   scoreBox.textContent = `SCORE: ${score}`;
