@@ -17,6 +17,8 @@ let health = 3;
 let score = 0;
 let highScore;
 
+const inpBox = document.getElementById("textbox");
+
 let init = false;
 
 highScore = localStorage.getItem("high-score");
@@ -105,6 +107,8 @@ function gameOver() {
 }
 
 function startGame() {
+  inpBox.value = "";
+  inpBox.focus();
   highScore = localStorage.getItem("high-score");
   init = true;
   health = 3;
@@ -150,6 +154,7 @@ function pauseGame() {
 }
 
 function resumeGame() {
+  inpBox.focus();
   document.querySelector(".pauseScreen").classList.add("goToTop");
   pause = false;
 }
