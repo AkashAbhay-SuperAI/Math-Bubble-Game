@@ -124,6 +124,15 @@ font {
   cursor: pointer;
 }
 
+.smText {
+  font-size: 1.5rem;
+  color: white;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
 .goToTop {
   top: -100%;
 }

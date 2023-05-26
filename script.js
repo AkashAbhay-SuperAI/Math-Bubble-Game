@@ -82,6 +82,9 @@ let intervalId = null;
 
 // Game over event
 function gameOver() {
+  document.querySelector(
+    ".smText"
+  ).innerHTML = `<font>High Score: ${highScore}</font><font>Score: ${score}</font>`;
   document.querySelector(".gameOverScreen").classList.remove("goToTop");
   pause = true;
   const bubbles = Array.from(document.getElementsByClassName("bubble"));
@@ -97,6 +100,8 @@ function gameOver() {
 
 function startGame() {
   health = 3;
+  score = 0;
+  scoreBox.textContent = `SCORE: ${score}`;
   pause = false;
   document.querySelector(".playScreen").classList.add("goToTop");
   document.querySelector(".gameOverScreen").classList.add("goToTop");
