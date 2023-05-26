@@ -97,6 +97,7 @@ function gameOver() {
 
 function startGame() {
   health = 3;
+  pause = false;
   document.querySelector(".playScreen").classList.add("goToTop");
   document.querySelector(".gameOverScreen").classList.add("goToTop");
   intervalId = setInterval(createBubble, 1500);
