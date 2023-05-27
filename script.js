@@ -32,10 +32,6 @@ window.addEventListener("blur", function () {
   if (health && init) pauseGame();
 });
 
-window.addEventListener("focus", () => {
-  if (init) resumeGame();
-});
-
 let scoreBox = document.querySelector(".score");
 
 function createBubble() {
