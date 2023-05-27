@@ -28,7 +28,7 @@ if (!highScore) {
   highScore = 0;
 }
 
-window.addEventListener("visibilitychange", function () {
+window.addEventListener("focus", function () {
   if (health && init) pauseGame();
 });
 
