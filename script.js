@@ -28,12 +28,12 @@ if (!highScore) {
   highScore = 0;
 }
 
-window.addEventListener("blur", function () {
+window.addEventListener("visibilitychange", function () {
   if (health && init) pauseGame();
 });
 
-window.addEventListener("resize", () => {
-  if (init) gameOver();
+window.addEventListener("focus", () => {
+  if (init) resumeGame();
 });
 
 let scoreBox = document.querySelector(".score");
