@@ -28,7 +28,7 @@ if (!highScore) {
   highScore = 0;
 }
 
-window.addEventListener("focus", function () {
+window.addEventListener("blur", function () {
   if (health && init) pauseGame();
 });
 
