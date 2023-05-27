@@ -32,6 +32,10 @@ window.addEventListener("blur", function () {
   if (health && init) pauseGame();
 });
 
+window.addEventListener("resize", () => {
+  if (init) gameOver();
+});
+
 let scoreBox = document.querySelector(".score");
 
 function createBubble() {
